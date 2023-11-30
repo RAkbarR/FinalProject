@@ -11,4 +11,5 @@ Feature: Test Automation Rest API
   @api
   Scenario: Test Create User
     Given prepare valid url "CREATE_NEW_USER"
-    And hit API to get list data
+    And hit API to post create user
+    Then verification status code must be 201

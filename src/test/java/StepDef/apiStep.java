@@ -34,5 +34,10 @@ public class apiStep {
     public void validateResponseJSONWithJSONSchema(String filename) {
         apiPage.ValidateJsonWithJsonSchema(filename);
     }
+
+    @And("hit API to post create user")
+    public void hitAPIToPostCreateUser() {
+        apiPage.hitApiPostCreateUser();
+    }
 }
 

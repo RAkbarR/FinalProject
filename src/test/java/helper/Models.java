@@ -3,6 +3,9 @@ package helper;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.json.JSONObject;
+
+import static helper.Utility.generateRandomEmail;
 
 public class Models {
     private static RequestSpecification request;
@@ -16,5 +19,20 @@ public class Models {
         System.out.println(" endpoint yang di lempar : " + endpoint);
         setupHeaders();
         return request.when().get(endpoint);
+    }
+
+    public static Response postCreateUser (String endpoint){
+        String name = "Rizky Ramadhan";
+        String gender = "male";
+        String email = generateRandomEmail();
+        String status = "active";
+        JSONObject payLoad = new JSONObject();
+        payLoad.put("name", name);
+        payLoad.put("gender", gender);
+        payLoad.put("email", email);
+        payLoad.put("status", status);
+
+        setupHeaders();
+        return request.body(payLoad.toString()).when().post(endpoint);
     }
 }

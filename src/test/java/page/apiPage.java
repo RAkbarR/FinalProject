@@ -5,6 +5,7 @@ import helper.endpoint;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import static helper.Models.getListUser;
+import static helper.Models.postCreateUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
@@ -58,5 +59,10 @@ assertThat(res.statusCode()).isEqualTo(status_code);
     public void ValidateJsonWithJsonSchema(String filename){
         File JSONfile = Utility.getJSONSchemaFile(filename);
         res.then().assertThat().body(JsonSchemaValidator.matchesJsonSchema(JSONfile));
+    }
+
+    public void hitApiPostCreateUser(){
+        res = postCreateUser(setURL);
+        System.out.println(res.getBody().asString());
     }
 }
