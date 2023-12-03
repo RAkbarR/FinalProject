@@ -13,3 +13,24 @@ Feature: Test Automation Rest API
     Given prepare valid url "CREATE_NEW_USER"
     And hit API to post create user
     Then verification status code must be 201
+    Then validate response body to post new user
+    Then validate response JSON with JSONSchema "post_create_new_user.json"
+
+  @api
+  Scenario: Test Delete User
+    Given prepare valid url "CREATE_NEW_USER"
+    And hit API to post create user
+    Then verification status code must be 201
+    Then validate response body to post new user
+    And hit API to delete user
+    Then verification status code must be 204
+
+  @api
+  Scenario: Test Update User
+    Given prepare valid url "CREATE_NEW_USER"
+    And hit API to post create user
+    Then verification status code must be 201
+    Then validate response body to post new user
+    And hit API to update data
+    Then verification status code must be 200
+    Then validate response body to update user

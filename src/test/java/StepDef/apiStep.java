@@ -25,6 +25,8 @@ public class apiStep {
     public void VerificationStatus200(int status_code){
         apiPage.VerifStatus(status_code);
     }
+
+
     @Then("verification data should not be null")
     public void DataNotNull(){
         apiPage.DataNotNull();
@@ -38,6 +40,26 @@ public class apiStep {
     @And("hit API to post create user")
     public void hitAPIToPostCreateUser() {
         apiPage.hitApiPostCreateUser();
+    }
+
+    @Then("validate response body to post new user")
+    public void validateResponseBodyToPostNewUser() {
+    apiPage.validateResponseBodyToCreateNewUser();
+    }
+
+    @And("hit API to delete user")
+    public void hitAPIToDeleteUser() {
+    apiPage.hitApiDeleteUser();
+    }
+
+    @And("hit API to update data")
+    public void hitAPIToUpdateData() {
+    apiPage.hitApiUpdateUser();
+    }
+
+    @Then("validate response body to update user")
+    public void validateResponseBodyToUpdateUser() {
+        apiPage.validationResponseBodyUpdateUser();
     }
 }
 

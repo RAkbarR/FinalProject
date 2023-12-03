@@ -35,4 +35,26 @@ public class Models {
         setupHeaders();
         return request.body(payLoad.toString()).when().post(endpoint);
     }
+    public static Response deleteUser(String endpoint, String user_id){
+        setupHeaders();
+        String finalEndpoint = endpoint + "/" + user_id;
+        return request.when().delete(finalEndpoint);
+    }
+
+    public static Response updateUser(String endpoint, String user_id){
+        setupHeaders();
+
+        String name = "Rizky Update";
+        String gender = "male";
+        String email = generateRandomEmail();
+        String status = "active";
+        JSONObject payLoad = new JSONObject();
+        payLoad.put("name", name);
+        payLoad.put("gender", gender);
+        payLoad.put("email", email);
+        payLoad.put("status", status);
+
+        String finalEndpoint = endpoint + "/" + user_id;
+        return request.body(payLoad.toString()).when().patch(finalEndpoint);
+    }
 }

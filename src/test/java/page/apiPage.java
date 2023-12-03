@@ -3,9 +3,10 @@ package page;
 import helper.Utility;
 import helper.endpoint;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import static helper.Models.getListUser;
-import static helper.Models.postCreateUser;
+
+import static helper.Models.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class apiPage {
 
-    String setURL;
+    String setURL, global_id;
     Response res;
     public void prepareURL(String url){
         switch (url){
@@ -38,7 +39,7 @@ public class apiPage {
         System.out.println(res.getBody().asString());
     }
     public void VerifStatus(int status_code){
-assertThat(res.statusCode()).isEqualTo(status_code);
+    assertThat(res.statusCode()).isEqualTo(status_code);
         System.out.println("Status code : " + status_code);
     }
 
@@ -62,7 +63,50 @@ assertThat(res.statusCode()).isEqualTo(status_code);
     }
 
     public void hitApiPostCreateUser(){
+        //Hit Post Button
         res = postCreateUser(setURL);
         System.out.println(res.getBody().asString());
+    }
+
+    public void validateResponseBodyToCreateNewUser(){
+        JsonPath JsonPathEvaluator = res.jsonPath();
+        Integer id = JsonPathEvaluator.get("id");
+        String name = JsonPathEvaluator.get("name");
+        String email = JsonPathEvaluator.get("email");
+        String gender = JsonPathEvaluator.get("gender");
+        String status = JsonPathEvaluator.get("status");
+
+        assertThat(id).isNotNull();
+        assertThat(name).isNotNull();
+        assertThat(email).isNotNull();
+        assertThat(gender).isIn("female", "male");
+        assertThat(status).isIn("active", "inactive");
+
+        global_id = Integer.toString(id) ;
+
+    }
+
+    public void hitApiDeleteUser(){
+        res = deleteUser(setURL, global_id);
+    }
+
+    public void hitApiUpdateUser(){
+        res = updateUser(setURL, global_id);
+    }
+
+    public void validationResponseBodyUpdateUser(){
+        JsonPath JsonPathEvaluator = res.jsonPath();
+        Integer id = JsonPathEvaluator.get("id");
+        String name = JsonPathEvaluator.get("name");
+        String email = JsonPathEvaluator.get("email");
+        String gender = JsonPathEvaluator.get("gender");
+        String status = JsonPathEvaluator.get("status");
+
+        assertThat(id).isNotNull();
+        assertThat(name).isNotNull();
+        assertThat(email).isNotNull();
+        assertThat(gender).isIn("female", "male");
+        assertThat(status).isIn("active", "inactive");
+
     }
 }
