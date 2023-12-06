@@ -17,27 +17,32 @@ public class apiStep {
     public void PrepareUrlGetValidData(String url){
     apiPage.prepareURL(url);
 }
-@And("hit API to get list data")
+@And("hit API to get list data") //Method when hit API, will get data list
     public void HitApiToGetListData(){
     apiPage.HitApi();
 }
-    @Then("verification status code must be {int}")
+    @Then("verification status code must be {int}") // Method to get status code from each step
     public void VerificationStatus200(int status_code){
         apiPage.VerifStatus(status_code);
     }
 
 
-    @Then("verification data should not be null")
+    @Then("verification data should not be null") //To verify that the data is not null
     public void DataNotNull(){
         apiPage.DataNotNull();
     }
 
-    @Then("validate response JSON with JSONSchema {string}")
+   // @Then("verification data for specific user should not be null")
+    //public void verificationDataForSpecificUserShouldNotBeNull() {
+      //  apiPage.DataNotNullSpecific();
+    //}
+
+    @Then("validate response JSON with JSONSchema {string}") //To get JSON data using JSONSchema
     public void validateResponseJSONWithJSONSchema(String filename) {
         apiPage.ValidateJsonWithJsonSchema(filename);
     }
 
-    @And("hit API to post create user")
+    @And("hit API to post create user") //Method when hit API, will create a new user on the list
     public void hitAPIToPostCreateUser() {
         apiPage.hitApiPostCreateUser();
     }
@@ -47,12 +52,12 @@ public class apiStep {
     apiPage.validateResponseBodyToCreateNewUser();
     }
 
-    @And("hit API to delete user")
+    @And("hit API to delete user") //Method when hit API, will delete a user data from the list
     public void hitAPIToDeleteUser() {
     apiPage.hitApiDeleteUser();
     }
 
-    @And("hit API to update data")
+    @And("hit API to update data") //Method when hit API, will update user data
     public void hitAPIToUpdateData() {
     apiPage.hitApiUpdateUser();
     }
@@ -60,6 +65,20 @@ public class apiStep {
     @Then("validate response body to update user")
     public void validateResponseBodyToUpdateUser() {
         apiPage.validationResponseBodyUpdateUser();
+    }
+
+    @And("input bearer token") //Remind user to use bearer token
+    public void inputBearerToken() {
+    apiPage.inputBearerToken();
+    }
+
+    @And("select RAW on menu body")
+    public void selectRAWOnMenuBody() {
+        apiPage.selectBodyRaw();
+    }
+    @And("select JSON")
+    public void selectJSON() {
+        apiPage.selectJSON();
     }
 }
 

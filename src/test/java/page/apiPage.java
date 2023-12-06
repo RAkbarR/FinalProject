@@ -5,6 +5,8 @@ import helper.endpoint;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import com.google.common.collect.Lists;
+import com.google.common.base.Functions;
 
 import static helper.Models.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,6 +24,9 @@ public class apiPage {
         switch (url){
             case "GET_LIST_USER" :
                 setURL = endpoint.GET_LIST_USER;
+                break;
+            case "GET_LIST_USER_SPECIFIC" :
+                setURL = endpoint.GET_LIST_USER_SPECIFIC;
                 break;
             case "CREATE_NEW_USER" :
                 setURL = endpoint.CREATE_NEW_USER;
@@ -55,6 +60,22 @@ public class apiPage {
         assertThat(email.get(0)).isNotNull();
         assertThat(gender.get(0)).isIn("female", "male");
         assertThat(status.get(0)).isIn("active", "inactive");
+    }
+
+    public void DataNotNullSpecific(){
+        List<Object> id = res.jsonPath().getList("id");
+        List<Object> name = res.jsonPath().getList("name");
+        List<Object> email = res.jsonPath().getList("email");
+        List<Object> gender = res.jsonPath().getList("gender");
+        List<Object> status = res.jsonPath().getList("status");
+
+        assertThat(id.get(0)).isNotNull();
+        assertThat(name.get(0)).isNotNull();
+        assertThat(email.get(0)).isNotNull();
+        assertThat(gender.get(0)).isIn("female", "male");
+        assertThat(status.get(0)).isIn("active", "inactive");
+
+        List<Object> strings = Lists.transform(id, Functions.toStringFunction());
     }
 
     public void ValidateJsonWithJsonSchema(String filename){
@@ -108,5 +129,17 @@ public class apiPage {
         assertThat(gender).isIn("female", "male");
         assertThat(status).isIn("active", "inactive");
 
+    }
+
+    public void inputBearerToken() {
+        System.out.println("bearer token : 10eeef75ac2df855613fb58b310d2a1dded38fb9a7a260cc15ef87e52930c767");
+    }
+
+    public void selectBodyRaw (){
+        System.out.println("Please select RAW on body menu");
+    }
+
+    public void selectJSON (){
+        System.out.println("Please select JSON");
     }
 }
