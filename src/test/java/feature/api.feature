@@ -17,7 +17,7 @@ Feature: Test Automation Rest API
     #Then validate response JSON with JSONSchema "get_list_users_normal.json"
 
   @api
-  Scenario: Test Create User
+  Scenario: Create a new User
     Given prepare valid url "CREATE_NEW_USER"
     And input bearer token
     And select RAW on menu body
@@ -28,20 +28,26 @@ Feature: Test Automation Rest API
     Then validate response JSON with JSONSchema "post_create_new_user.json"
 
   @api
-  Scenario: Test Delete User
+  Scenario: Delete User Data
     Given prepare valid url "CREATE_NEW_USER"
     And hit API to post create user
     Then verification status code must be 201
     Then validate response body to post new user
+    And input bearer token
+    And select RAW on menu body
+    And select JSON
     And hit API to delete user
     Then verification status code must be 204
 
   @api
-  Scenario: Test Update User
+  Scenario: Update user data
     Given prepare valid url "CREATE_NEW_USER"
     And hit API to post create user
     Then verification status code must be 201
     Then validate response body to post new user
+    And input bearer token
+    And select RAW on menu body
+    And select JSON
     And hit API to update data
     Then verification status code must be 200
     Then validate response body to update user
