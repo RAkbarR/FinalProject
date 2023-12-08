@@ -24,6 +24,9 @@ Berikut merupakan dependencies yang saya gunakan :
 
 Berikut scenario yang ditulis menggunakan aturan tata bahasa Gherkin (Cucumber) :
 
+Positive Test Case :
+
+
 Feature: Test Automation Rest API
 
   @api
@@ -82,6 +85,69 @@ Feature: Test Automation Rest API
     Then verification status code must be 200
     Then validate response body to update user
 
+
+Negative Test Case :
+
+
+@api
+
+
+  Scenario: Test Get List Data
+  
+    Given prepare valid url "GET_LIST_USERS"
+    And hit API to get list data
+    Then verification status code must be 200
+    Then verification data should not be null
+    Then validate response JSON with JSONSchema "get_list_users_normal.json"
+
+
+
+@api
+
+  Scenario: Create a new User
+  
+    Given prepare valid url ""
+    And input bearer token
+    And select RAW on menu body
+    And select JSON
+    And hit API to post create user
+    Then verification status code must be 201
+    Then validate response body to post new user
+    Then validate response JSON with JSONSchema "post_create_new_user.json"
+
+
+ @api
+    
+  Scenario: Delete User Data
+  
+    Given prepare valid url "CREATE_NEW_USER"
+    And hit API to post create user
+    Then verification status code must be 201
+    Then validate response body to post new user
+    And input bearer token
+    And select RAW on menu body
+    And select JSON
+    And hit API to delete user
+    Then verification status code must be 201
+
+
+@api
+
+  Scenario: Update user data
+  
+    Given prepare valid url "CREATE_NEW_USER"
+    And hit API to post create user
+    Then verification status code must be 201
+    Then validate response body to post new user
+    And input bearer token
+    And select RAW on menu body
+    And select JSON
+    And hit API to update data
+    Then verification status code must be 201
+    Then validate response body to update user
+
+
+    
 Berikut merupakan SS hasil positif dan negatif dari dari request GET all data user :
 
 Positif : 
@@ -133,10 +199,10 @@ Positif :
 <img width="659" alt="image" src="https://github.com/RAkbarR/Modul20/assets/149433996/ed2efdcc-93ac-4e6a-8310-320448e6cc67">
 
 
-Negatif(Data nama Null):
+Negatif(Salah Status Code):
 
 
-<img width="511" alt="image" src="https://github.com/RAkbarR/Modul20/assets/149433996/5ee1ea4e-d30b-4083-ab6e-fc61b04f9b31">
+<img width="843" alt="image" src="https://github.com/RAkbarR/Modul20/assets/149433996/ac47c05c-5851-4e2b-b580-79edf53d0b10">
 
 
 
