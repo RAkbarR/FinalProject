@@ -113,6 +113,7 @@ public class apiPage {
 
     public void hitApiUpdateUser(){
         res = updateUser(setURL, global_id);
+        System.out.println(res.getBody().asString());
     }
 
     public void validationResponseBodyUpdateUser(){
