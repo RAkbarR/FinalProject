@@ -37,4 +37,23 @@ public class webStep {
     public void userCanSeeValidationOnSideNav() {
         webPage.assert_show_sidebar_info();
     }
+
+    @And("user click admin toogle menu")
+    public void userClickAdminToogleMenu() {
+        webPage.adminToogleClick();
+    }
+
+    @And("user input admin username {string}")
+    public void userInputAdminUsername(String adminusername) {
+        webPage.insertAdminUsername(adminusername);
+    }
+    @And("user press search button")
+    public void userPressSearchButton() {
+        webPage.btnAdminSearch();
+    }
+
+    @Then("user will see admin records")
+    public void userWillSeeAdminRecords() {
+        webPage.showAdminRecord();
+    }
 }

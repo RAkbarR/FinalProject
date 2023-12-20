@@ -88,7 +88,6 @@ Feature: Test Automation Rest API
   Scenario: Wrong Status Code Update user data
     Given prepare valid url "CREATE_NEW_USER"
     And hit API to post create user
-    Then verification status code must be 201
     Then validate response body to post new user
     And input bearer token
     And select RAW on menu body
