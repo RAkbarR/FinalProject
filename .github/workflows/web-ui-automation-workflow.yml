@@ -29,9 +29,9 @@ jobs:
        
     #setup gradle
     - name: setup gradlew
-      run: chmod +x gradlew
+      run: chmod +X gradlew
 
     #execute gradle command to run cucumber test
     - name: execute test
-      run: ./ gradlew cucumber
+      run: ./gradlew cucumber
     
