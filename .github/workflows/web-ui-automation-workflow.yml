@@ -26,9 +26,17 @@ jobs:
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v0.0.0
       
-    # setup graldew
-    - name: Setup gradlew
-      run: chmod +x https://github.com/RAkbarR/Modul20/blob/eaa8a073b8c1cd96684570fb6f5ebfbfa1a8117c/gradlew 
+    - name: Change wrapper permissions
+      run: chmod +x ./gradlew
+
+    - name: Init gradle wrapper
+      run: gradle wrapper
+
+    - name: Change wrapper permissions
+      run: chmod +x ./gradlew
+
+    - name: Build with Gradle wrapper
+      run: ./gradlew build
       
     # Execute gradle command for running cucumber test
     - name: Execute Test
