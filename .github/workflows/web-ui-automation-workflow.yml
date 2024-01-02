@@ -26,17 +26,11 @@ jobs:
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v0.0.0
 
-    - name: Look for gradlew
-      run: find / -type f -name "gradlew"
-      
     - name: Change wrapper permissions
-      run: chmod +x ./gradlew
+      run: chmod +x gradlew
 
     - name: Init gradle wrapper
       run: gradle wrapper
-
-    - name: Change wrapper permissions
-      run: chmod +x ./gradlew
 
     - name: Build with Gradle wrapper
       run: ./gradlew build
