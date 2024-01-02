@@ -25,6 +25,9 @@ jobs:
     # install chrome browser
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@v0.0.0
+
+    - name: Look for gradlew
+      run: find / -type f -name "gradlew"
       
     - name: Change wrapper permissions
       run: chmod +x ./gradlew
