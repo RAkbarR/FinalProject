@@ -28,12 +28,6 @@ jobs:
 
     - name: Change wrapper permissions
       run: chmod +x gradlew
-
-    - name: Init gradle wrapper
-      run: gradle wrapper
-
-    - name: Build with Gradle wrapper
-      run: ./gradlew build
       
     # Execute gradle command for running cucumber test
     - name: Execute Test
