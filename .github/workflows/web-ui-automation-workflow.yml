@@ -46,5 +46,6 @@ jobs:
       if: always()
       uses: peaceiris/actions-gh-pages@v3.9.3
       with:
-        PERSONAL_TOKEN: ${{ secret.GITHUB_TOKEN }}
+        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         PUBLISH_DIR: reports
+
