@@ -1,0 +1,78 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.akbar'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.1'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.1'
+
+    implementation 'io.cucumber:cucumber-java:7.14.0'
+    testImplementation 'io.cucumber:cucumber-junit:7.14.0'
+
+    testImplementation 'io.rest-assured:rest-assured:5.3.0'
+    implementation 'org.json:json:20220924'
+    testImplementation 'io.rest-assured:json-path:5.3.0'
+    implementation 'io.rest-assured:json-schema-validator:5.3.0'
+    testImplementation 'org.assertj:assertj-core:3.24.0'
+
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.16.1'
+    implementation 'io.github.bonigarcia:webdrivermanager:5.6.2'
+
+
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty "cucumber.filter.tags", System.getProperty("cucumber.filter.tags")
+}
+configurations {
+    cucumberRuntime{
+        extendsFrom testImplementation
+    }
+}
+
+tasks.register('apiTest'){
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec{
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'html:reports/cucumber-api-report.html',
+                    '--glue', 'StepDef',
+                    '--tags', '@api',
+                    'src/test/java/feature'
+            ]
+
+        }
+    }
+}
+
+
+tasks.register('webTest'){
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec{
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'html:reports/cucumber-web-report.html',
+                    '--glue', 'StepDef',
+                    '--tags', '@web',
+                    'src/test/java/feature'
+            ]
+
+        }
+    }
+}
