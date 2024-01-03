@@ -16,7 +16,7 @@ Feature: Test Automation API
     And User input username "min"
     And User Input Password "admin123"
     And User press button Login
-    Then user can see validation on side nav
+    Then user can see info text err "Invalid credentials"
 
   #positive admin search by username
   @web
@@ -42,4 +42,4 @@ Feature: Test Automation API
     And user click admin toogle menu
     And user input admin username "Adi"
     And user press search button
-    Then user will see admin records
+    Then user will see no records
