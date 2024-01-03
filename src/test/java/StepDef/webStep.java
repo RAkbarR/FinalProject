@@ -34,17 +34,17 @@ public class webStep {
 
 
     @Then("user can see validation on side nav")
-    public void userCanSeeValidationOnSideNav() {
+    public void userCanSeeValidationOnSideNav() throws InterruptedException {
         webPage.assert_show_sidebar_info();
     }
 
     @And("user click admin toogle menu")
-    public void userClickAdminToogleMenu() {
+    public void userClickAdminToogleMenu() throws InterruptedException {
         webPage.adminToogleClick();
     }
 
     @And("user input admin username {string}")
-    public void userInputAdminUsername(String adminusername) {
+    public void userInputAdminUsername(String adminusername) throws InterruptedException {
         webPage.insertAdminUsername(adminusername);
     }
     @And("user press search button")
@@ -55,5 +55,15 @@ public class webStep {
     @Then("user will see admin records")
     public void userWillSeeAdminRecords() {
         webPage.showAdminRecord();
+    }
+
+    @Then("user can see info text err {string}")
+    public void userCanSeeInfoTextErr(String texterr) {
+        webPage.errTextShow(texterr);
+    }
+
+    @Then("user will see no records")
+    public void userWillSeeNoRecords() {
+        webPage.showAdminRecordNotFound();
     }
 }
