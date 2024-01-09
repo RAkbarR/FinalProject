@@ -1,4 +1,4 @@
-Feature: Test Automation API
+Feature: Test Automation Web Selenium
 
   #Positive Login Test
   @web
@@ -43,3 +43,29 @@ Feature: Test Automation API
     And user input admin username "Adi"
     And user press search button
     Then user will see no records
+
+    #admin update name
+  @web
+  Scenario: Test Update Admin Name
+    Given User is on login page
+    And User input username "Admin"
+    And User Input Password "admin123"
+    And User press button Login
+    Then user can see validation on side nav
+    And user click admin toogle menu
+    And user click icon update admin
+    And user change admin name "Peter Mac Anderson"
+    Then user click submit admin update
+
+     #negative admin update name
+  @web
+  Scenario: Negative Test Update Admin Name
+    Given User is on login page
+    And User input username "Admin"
+    And User Input Password "admin123"
+    And User press button Login
+    Then user can see validation on side nav
+    And user click admin toogle menu
+    And user click icon update admin
+    And user change admin name ""
+    Then user click submit admin update

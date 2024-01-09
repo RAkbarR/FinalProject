@@ -66,4 +66,19 @@ public class webStep {
     public void userWillSeeNoRecords() {
         webPage.showAdminRecordNotFound();
     }
+
+    @And("user click icon update admin")
+    public void userClickIconUpdateAdmin() {
+        webPage.btnAdminUpdate();
+    }
+
+    @And("user change admin name {string}")
+    public void userChangeAdminName(String name) {
+        webPage.adminChangeName(name);
+    }
+
+    @Then("user click submit admin update")
+    public void userClickSubmitAdminUpdate() {
+        webPage.saveAdminUpdate();
+    }
 }
