@@ -1,4 +1,4 @@
-name: web automation workflow
+name: web automation workflow update
 
 on:
   push:
