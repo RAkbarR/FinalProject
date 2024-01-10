@@ -1,28 +1,22 @@
-# Modul20
+# FINAL PROJECT
 Berikut merupakan hasil testing yang telah saya buat
 
-
-Scenario yang digunakan : GET, POST, PATCH, DELETE
-
-
-Sumber yang saya gunakan yaitu video final test 1-3
-
-
-Catatan untuk beberapa langkah seperti input bearer token, Select RAW saya hanya memakai SOUT karena minim pengetahuan akan kode nya dan tidak dapat sumbernya.
+Jenis automation test yang dilakukan :
+1. API Test --> https://gorest.co.in/public/v2/
+2. Web automation test --> https://opensource-demo.orangehrmlive.com/
 
 
 Berikut merupakan dependencies yang saya gunakan :
 
-<img width="611" alt="image" src="https://github.com/RAkbarR/Modul20/assets/149433996/9234d076-2287-4cd5-b456-b637123fc54f">
+<img width="590" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/472f8075-7599-456e-8545-4a8528b36143">
+
+<img width="701" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/82404602-7920-4d51-8757-c16634ed2eb4">
+
+<img width="672" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/1a72e81f-ed12-4dee-b069-02e92f9318dd">
 
 
-<img width="582" alt="image" src="https://github.com/RAkbarR/Modul20/assets/149433996/0cbb8d64-3335-44e0-b228-f7dae48aec22">
 
-
-
-
-
-Berikut scenario yang ditulis menggunakan aturan tata bahasa Gherkin (Cucumber) :
+Berikut scenario API test (@api) yang ditulis menggunakan aturan tata bahasa Gherkin (Cucumber) :
 
 Positive Test Case :
 
@@ -206,16 +200,125 @@ Negatif(Salah Status Code):
 
 
 
-
-Berikut merupakan Report dalam format HTML :
-
-
-<img width="602" alt="image" src="https://github.com/RAkbarR/Modul20/assets/149433996/819495d7-5fa4-4440-9d20-3a1fa234d20e">
+Berikut scenario Web automation test (@web) yang ditulis menggunakan aturan tata bahasa Gherkin (Cucumber) :
 
 
-<img width="601" alt="image" src="https://github.com/RAkbarR/Modul20/assets/149433996/17fb34ce-7554-4147-a639-fd5d2a504cb1">
+Feature: Test Automation Web Selenium
 
+  #Positive Login Test
+  
+  @web
+  
+  Scenario: Test Web Login
+  
+    Given User is on login page
+    And User input username "Admin"
+    And User Input Password "admin123"
+    And User press button Login
+    Then user can see validation on side nav
 
+  #Negative Login Test
+  
+  @web
+  
+  Scenario: Negative Test Web Login
+  
+    Given User is on login page
+    And User input username "min"
+    And User Input Password "admin123"
+    And User press button Login
+    Then user can see info text err "Invalid credentials"
 
+  #positive admin search by username
+  
+  @web
+  
+  Scenario: Test Search Admin Username
+  
+    Given User is on login page
+    And User input username "Admin"
+    And User Input Password "admin123"
+    And User press button Login
+    Then user can see validation on side nav
+    And user click admin toogle menu
+    And user input admin username "Admin"
+    And user press search button
+    Then user will see admin records
 
+  #negative admin search by username (wrong username)
+  
+  @web
+  
+  Scenario: Negative Test Search Admin Username
+  
+    Given User is on login page
+    And User input username "Admin"
+    And User Input Password "admin123"
+    And User press button Login
+    Then user can see validation on side nav
+    And user click admin toogle menu
+    And user input admin username "Adi"
+    And user press search button
+    Then user will see no records
+
+    #admin update name
     
+  @web
+  
+  Scenario: Test Update Admin Name
+  
+    Given User is on login page
+    And User input username "Admin"
+    And User Input Password "admin123"
+    And User press button Login
+    Then user can see validation on side nav
+    And user click admin toogle menu
+    And user click icon update admin
+    And user change admin name "Peter Mac Anderson"
+    Then user click submit admin update
+
+     #negative admin update name
+     
+  @web
+  
+  Scenario: Negative Test Update Admin Name
+  
+    Given User is on login page
+    And User input username "Admin"
+    And User Input Password "admin123"
+    And User press button Login
+    Then user can see validation on side nav
+    And user click admin toogle menu
+    And user click icon update admin
+    And user change admin name ""
+    Then user click submit admin update
+
+
+Berikut merupakan hasil testing web automation : 
+1. Test web login (positive test)
+
+   <img width="536" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/febdcd50-5913-4191-b2b7-42f5ddfe72cc">
+
+2. Negative test web login (negayive test)
+
+   <img width="497" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/552e3e43-9183-4be4-b091-c1784ee24f3b">
+
+3. Test search admin username (positive test)
+
+   <img width="512" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/453374a9-6711-4c15-a830-3f6b87febd93">
+
+4.Negative search admin username (negative test)
+
+  <img width="491" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/8f926865-9c45-43f1-8730-9b9bb309de97">
+
+5. Test admin update name (positive test)
+
+   <img width="497" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/19cd487c-c897-44e0-8215-22f8fa7634f8">
+
+6. Negative test admin update (negative test)
+
+   <img width="497" alt="image" src="https://github.com/RAkbarR/FinalProject/assets/149433996/8f8459c4-b172-40bf-aaa0-b26610885b6e">
+ 
+Untuk workflow dan juga artifact nya sudah dapat ditemukan dengan mengakses .github/workflows
+
+Terima kasih!
